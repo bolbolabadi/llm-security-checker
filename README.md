@@ -1,17 +1,17 @@
 # LLM Security Checker
 
-یک اسکریپت جامع برای انجام چک‌لیست امنیتی کامل برای LLM endpoints.
+A comprehensive script for performing a complete security checklist for LLM endpoints.
 
-## ویژگی‌ها
+## Features
 
-این اسکریپت 12 دسته از تست‌های امنیتی را انجام می‌دهد:
+This script performs 12 categories of security tests:
 
-1. **SSL/TLS & Connectivity Security** - بررسی HTTPS، گواهی SSL، و HSTS
-2. **Authentication & Authorization** - تست session_id و احراز هویت
-3. **Input Validation & Injection Attacks** - SQL، Command، XSS، Path Traversal، LDAP، XXE
-4. **Rate Limiting & DoS Protection** - بررسی محدودیت نرخ درخواست
-5. **Information Disclosure** - بررسی خطاهای تفصیلی و headers حساس
-6. **Prompt Injection & Jailbreak** - **60+ حمله prompt injection** شامل:
+1. **SSL/TLS & Connectivity Security** - Check HTTPS, SSL certificate, and HSTS
+2. **Authentication & Authorization** - Test session_id and authentication
+3. **Input Validation & Injection Attacks** - SQL, Command, XSS, Path Traversal, LDAP, XXE
+4. **Rate Limiting & DoS Protection** - Check request rate limiting
+5. **Information Disclosure** - Check detailed errors and sensitive headers
+6. **Prompt Injection & Jailbreak** - **60+ prompt injection attacks** including:
    - Direct Instruction Override
    - System Prompt Extraction
    - Developer/Admin Mode Claims
@@ -26,218 +26,218 @@
    - Social Engineering
    - Format Injection
    - Persona-Based Jailbreaks
-   - Multi-Language Attacks (شامل فارسی)
-   - و بسیاری دیگر...
-7. **Model Extraction & Membership Inference** - بررسی فاش شدن اطلاعات مدل
-8. **Response Validation & Output Encoding** - اعتبارسنجی JSON و encoding
-9. **Security Headers** - بررسی headers امنیتی (CSP، X-Frame-Options، etc)
-10. **Session Management** - تست session fixation و cookie flags
-11. **Sensitive Data Handling** - بررسی فاش شدن session_id و PII
-12. **Error Handling & Logging** - تست handling خطاها و payload بزرگ
+   - Multi-Language Attacks
+   - And many more...
+7. **Model Extraction & Membership Inference** - Check model information disclosure
+8. **Response Validation & Output Encoding** - Validate JSON and encoding
+9. **Security Headers** - Check security headers (CSP, X-Frame-Options, etc)
+10. **Session Management** - Test session fixation and cookie flags
+11. **Sensitive Data Handling** - Check session_id and PII disclosure
+12. **Error Handling & Logging** - Test error handling and large payloads
 
-## نصب
+## Installation
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## استفاده
+## Usage
 
-### استفاده پایه‌ای
+### Basic Usage
 
 ```bash
 python3 llm_security_checker.py
 ```
 
-### با لاگ‌های پایه‌ای (-v)
+### With Basic Logs (-v)
 
 ```bash
 python3 llm_security_checker.py -v
 ```
 
-نمایش لاگ‌های پایه‌ای با timestamp:
-- شروع تست‌ها
-- وضعیت درخواست‌ها
-- پیام‌های تشخیصی
+Display basic logs with timestamp:
+- Test start
+- Request status
+- Diagnostic messages
 
-### با لاگ‌های تفصیلی (-vv)
+### With Detailed Logs (-vv)
 
 ```bash
 python3 llm_security_checker.py -vv
 ```
 
-نمایش تمام جزئیات شامل:
-- درخواست‌های HTTP (method، URL، payload، headers)
-- پاسخ‌های HTTP (status code، headers، body)
-- تمام لاگ‌های پایه‌ای
+Display all details including:
+- HTTP requests (method, URL, payload, headers)
+- HTTP responses (status code, headers, body)
+- All basic logs
 
-**نکته:** Headers حساس (Authorization، Cookie، Set-Cookie) برای امنیت مخفی می‌شوند.
+**Note:** Sensitive headers (Authorization, Cookie, Set-Cookie) are hidden for security.
 
-### استفاده از Proxy
+### Using Proxy
 
 ```bash
 python3 llm_security_checker.py --proxy http://localhost:8080
 ```
 
-### ترکیب گزینه‌ها
+### Combining Options
 
 ```bash
-# لاگ‌های تفصیلی + Proxy
+# Detailed logs + Proxy
 python3 llm_security_checker.py -vv --proxy http://localhost:8080
 
-# لاگ‌های پایه‌ای + Proxy
+# Basic logs + Proxy
 python3 llm_security_checker.py -v --proxy http://localhost:8080
 ```
 
-## خروجی
+## Output
 
-اسکریپت نتایج را با رنگ‌های مختلف نمایش می‌دهد:
+The script displays results with different colors:
 
-- ✓ **PASS** (سبز): تست موفق
-- ✗ **FAIL** (قرمز): آسیب‌پذیری شناسایی شد
-- ⚠ **WARN** (زرد): هشدار یا مسئله احتمالی
-- ℹ **INFO** (آبی): اطلاعات تشخیصی
+- ✓ **PASS** (Green): Test passed
+- ✗ **FAIL** (Red): Vulnerability found
+- ⚠ **WARN** (Yellow): Warning or potential issue
+- ℹ **INFO** (Blue): Diagnostic information
 
-## نتیجه نهایی
+## Final Result
 
-اسکریپت یک امتیاز امنیتی (0-100%) محاسبه می‌کند:
+The script calculates a security score (0-100%):
 
-- **80%+**: GOOD (خوب)
-- **60-80%**: FAIR (متوسط)
-- **<60%**: POOR (ضعیف)
+- **80%+**: GOOD
+- **60-80%**: FAIR
+- **<60%**: POOR
 
-## گزینه‌های Command Line
+## Command Line Options
 
 ```
--v, --verbose         افزایش سطح verbosity (-v برای پایه‌ای، -vv برای تفصیلی)
---proxy PROXY         استفاده از HTTP/HTTPS proxy (مثال: http://localhost:8080)
---curl-file FILE      تجزیه فایل curl و استخراج URL، headers، cookies
---url URL             آدرس تارگت LLM (مثال: https://api.example.com/chat)
---headers JSON        Headers سفارشی به صورت JSON (مثال: '{"Authorization":"Bearer token"}')
---data JSON           Request body سفارشی به صورت JSON (مثال: '{"question":"test","user_id":"123"}')
---method METHOD       HTTP method (GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS) - پیش‌فرض: POST
---log-file FILE       ثبت تمام درخواست‌ها و پاسخ‌ها در فایل (مثال: scan.log)
---threads N           تعداد thread‌های موازی برای اسکن (1-20، پیش‌فرض: 1)
---output FILE         ذخیره نتایج اسکن در فایل (مثال: results.txt)
---resume              ادامه اسکن قطع شده از نقطه قطع
---checks LIST         بخش‌های خاص برای اسکن (مثال: ssl,auth,injection)
--h, --help            نمایش راهنما
+-v, --verbose         Increase verbosity level (-v for basic, -vv for detailed)
+--proxy PROXY         Use HTTP/HTTPS proxy (e.g., http://localhost:8080)
+--curl-file FILE      Parse curl command from file
+--url URL             Target LLM URL (e.g., https://api.example.com/chat)
+--headers JSON        Custom headers as JSON (e.g., '{"Authorization":"Bearer token"}')
+--data JSON           Custom request body as JSON (e.g., '{"question":"test","user_id":"123"}')
+--method METHOD       HTTP method (GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS) - default: POST
+--log-file FILE       Log all requests and responses to file (e.g., scan.log)
+--threads N           Number of parallel threads for scanning (1-20, default: 1)
+--output FILE         Save scan results to file (e.g., results.txt)
+--resume              Resume interrupted scan from where it stopped
+--checks LIST         Specific checks to run (e.g., ssl,auth,injection)
+-h, --help            Show help message
 ```
 
-### توضیح گزینه‌ها:
+### Option Explanations:
 
-- **`--curl-file`**: فایل curl را تجزیه کرده و تمام مشخصات (URL، headers، cookies) را استخراج می‌کند
-- **`--url`**: آدرس تارگت را مستقیم مشخص می‌کند (الزامی اگر `--curl-file` استفاده نشود)
-- **`--headers`**: Headers اضافی یا جایگزین را به صورت JSON object مشخص می‌کند
-  - می‌تواند با `--curl-file` استفاده شود (merge می‌شود)
-  - می‌تواند با `--url` استفاده شود (جایگزین می‌شود)
-- **`--data`**: Request body را به صورت JSON object مشخص می‌کند
-  - می‌تواند با `--curl-file` استفاده شود (override می‌کند)
-  - می‌تواند با `--url` استفاده شود (جایگزین می‌شود)
-  - اختیاری است (برای GET requests نیازی نیست)
-- **`--method`**: HTTP method را مشخص می‌کند
-  - پیش‌فرض: POST
-  - می‌تواند با `--curl-file` استفاده شود (override می‌کند)
-  - می‌تواند با `--url` استفاده شود (جایگزین می‌شود)
-- **`--log-file`**: تمام درخواست‌ها و پاسخ‌ها را در فایل ثبت می‌کند
-  - شامل timestamps، headers، payloads، و responses
-  - حساس داده‌ها (Authorization، Cookies) به صورت `***REDACTED***` ثبت می‌شوند
-  - Thread-safe برای اسکن‌های موازی
-- **`--threads`**: تعداد thread‌های موازی را کنترل می‌کند
-  - 1-20 threads (پیش‌فرض: 1)
-  - threads بیشتر = اسکن سریع‌تر
-  - توصیه: 5-10 برای اسکن معمول
-- **`--output`**: نتایج اسکن را در فایل ذخیره می‌کند
-  - ANSI colors حذف می‌شوند (فقط متن ساده)
-  - Thread-safe برای اسکن‌های موازی
-  - نتایج هم روی console و هم در فایل ذخیره می‌شوند
-- **`--resume`**: اسکن قطع شده را ادامه می‌دهد
-  - state در `.scan_state.json` ذخیره می‌شود
-  - فقط برای همان URL کار می‌کند
-  - می‌توانید threads و دیگر گزینه‌ها را تغییر دهید
-- **`--checks`**: بخش‌های خاص را برای اسکن انتخاب می‌کند
-  - 13 بخش دستیاب: ssl, auth, input, rate, info, injection, extraction, response, headers, session, sensitive, llm, error
-  - با کاما جدا کنید: `--checks ssl,auth,injection`
-  - برای اسکن‌های سریع و فوکوس‌شده مفید است
+- **`--curl-file`**: Parse curl file and extract all details (URL, headers, cookies)
+- **`--url`**: Specify target URL directly (required if `--curl-file` not used)
+- **`--headers`**: Specify additional or replacement headers as JSON object
+  - Can be used with `--curl-file` (merged)
+  - Can be used with `--url` (replaced)
+- **`--data`**: Specify request body as JSON object
+  - Can be used with `--curl-file` (overridden)
+  - Can be used with `--url` (replaced)
+  - Optional (not needed for GET requests)
+- **`--method`**: Specify HTTP method
+  - Default: POST
+  - Can be used with `--curl-file` (overridden)
+  - Can be used with `--url` (replaced)
+- **`--log-file`**: Log all requests and responses to file
+  - Includes timestamps, headers, payloads, and responses
+  - Sensitive data (Authorization, Cookies) redacted as `***REDACTED***`
+  - Thread-safe for parallel scanning
+- **`--threads`**: Control number of parallel threads
+  - 1-20 threads (default: 1)
+  - More threads = faster scanning
+  - Recommended: 5-10 for normal scanning
+- **`--output`**: Save scan results to file
+  - ANSI colors removed (plain text only)
+  - Thread-safe for parallel scanning
+  - Results saved to both console and file
+- **`--resume`**: Resume interrupted scan
+  - State saved in `.scan_state.json`
+  - Only works for same URL
+  - Can change threads and other options
+- **`--checks`**: Select specific checks to run
+  - 13 available: ssl, auth, input, rate, info, injection, extraction, response, headers, session, sensitive, llm, error
+  - Separate with comma: `--checks ssl,auth,injection`
+  - Useful for fast and focused scanning
 
-## مثال‌های استفاده
+## Usage Examples
 
-### استفاده پایه‌ای
+### Basic Usage
 
 ```bash
-# اجرای ساده
+# Simple run
 python3 llm_security_checker.py
 
-# دیدن لاگ‌های پایه‌ای
+# With basic logs
 python3 llm_security_checker.py -v
 
-# دیدن تمام جزئیات درخواست و پاسخ
+# With all request/response details
 python3 llm_security_checker.py -vv
 
-# استفاده از Burp Suite proxy
+# Using Burp Suite proxy
 python3 llm_security_checker.py --proxy http://localhost:8080
 
-# ترکیب: لاگ تفصیلی + Burp proxy
+# Combine: detailed logs + Burp proxy
 python3 llm_security_checker.py -vv --proxy http://localhost:8080
 
-# ترکیب: لاگ تفصیلی + Zaproxy
+# Combine: detailed logs + Zaproxy
 python3 llm_security_checker.py -vv --proxy http://localhost:8090
 ```
 
-### استفاده با فایل Curl
+### Using Curl File
 
 ```bash
-# تجزیه فایل curl و اسکن با مشخصات آن
+# Parse curl file and scan with its details
 python3 llm_security_checker.py --curl-file request.curl
 
-# تجزیه فایل curl + لاگ‌های پایه‌ای
+# Parse curl file + basic logs
 python3 llm_security_checker.py --curl-file request.curl -v
 
-# تجزیه فایل curl + لاگ‌های تفصیلی
+# Parse curl file + detailed logs
 python3 llm_security_checker.py --curl-file request.curl -vv
 
-# تجزیه فایل curl + استفاده از proxy
+# Parse curl file + use proxy
 python3 llm_security_checker.py --curl-file request.curl --proxy http://localhost:8080
 
-# تجزیه فایل curl + لاگ تفصیلی + proxy
+# Parse curl file + detailed logs + proxy
 python3 llm_security_checker.py --curl-file request.curl -vv --proxy http://localhost:8080
 
-# تجزیه فایل curl + اضافه کردن headers سفارشی
+# Parse curl file + add custom headers
 python3 llm_security_checker.py --curl-file request.curl --headers '{"Authorization":"Bearer token123"}'
 
-# تجزیه فایل curl + جایگزینی headers
+# Parse curl file + replace headers
 python3 llm_security_checker.py --curl-file request.curl --headers '{"X-API-Key":"key123","X-Custom":"value"}'
 ```
 
-### استفاده با URL و Headers سفارشی
+### Using URL and Custom Headers
 
 ```bash
-# فقط URL (با default headers)
+# URL only (with default headers)
 python3 llm_security_checker.py --url https://api.example.com/chat
 
-# URL + یک header سفارشی
+# URL + one custom header
 python3 llm_security_checker.py --url https://api.example.com/chat --headers '{"Authorization":"Bearer token"}'
 
-# URL + چند header سفارشی
+# URL + multiple custom headers
 python3 llm_security_checker.py --url https://api.example.com/chat --headers '{"Authorization":"Bearer token","X-API-Key":"key123"}'
 
-# URL + headers + لاگ‌های تفصیلی
+# URL + headers + detailed logs
 python3 llm_security_checker.py --url https://api.example.com/chat --headers '{"Authorization":"Bearer token"}' -vv
 
 # URL + headers + proxy
 python3 llm_security_checker.py --url https://api.example.com/chat --headers '{"Authorization":"Bearer token"}' --proxy http://localhost:8080
 
-# URL + headers + لاگ تفصیلی + proxy
+# URL + headers + detailed logs + proxy
 python3 llm_security_checker.py --url https://api.example.com/chat --headers '{"Authorization":"Bearer token"}' -vv --proxy http://localhost:8080
 ```
 
-### استفاده با Request Data سفارشی
+### Using Custom Request Data
 
 ```bash
 # URL + custom data
 python3 llm_security_checker.py --url https://api.example.com/chat --data '{"question":"test"}'
 
-# URL + custom data با چند فیلد
+# URL + custom data with multiple fields
 python3 llm_security_checker.py --url https://api.example.com/chat --data '{"question":"test","user_id":"123","model":"gpt-4"}'
 
 # URL + headers + custom data
@@ -245,13 +245,13 @@ python3 llm_security_checker.py --url https://api.example.com/chat \
   --headers '{"Authorization":"Bearer token"}' \
   --data '{"question":"test","user_id":"123"}'
 
-# URL + custom data + لاگ تفصیلی
+# URL + custom data + detailed logs
 python3 llm_security_checker.py --url https://api.example.com/chat \
   --data '{"prompt":"hello","model":"gpt-4"}' \
   -vv
 ```
 
-### استفاده با HTTP Method سفارشی
+### Using Custom HTTP Method
 
 ```bash
 # URL + GET method
@@ -274,19 +274,19 @@ python3 llm_security_checker.py --url https://api.example.com/chat \
   -vv
 ```
 
-### استفاده با Logging
+### Using Logging
 
 ```bash
-# ساده - تمام درخواست‌ها و پاسخ‌ها ثبت می‌شوند
+# Simple - all requests and responses logged
 python3 llm_security_checker.py --url https://api.example.com/chat --log-file scan.log
 
-# با verbose logging
+# With verbose logging
 python3 llm_security_checker.py --url https://api.example.com/chat --log-file scan.log -vv
 
 # Curl file + logging
 python3 llm_security_checker.py --curl-file request.curl --log-file scan.log
 
-# تمام جزئیات در لاگ
+# All details in log
 python3 llm_security_checker.py --url https://api.example.com/chat \
   --headers '{"Authorization":"Bearer token"}' \
   --data '{"question":"test"}' \
@@ -294,13 +294,13 @@ python3 llm_security_checker.py --url https://api.example.com/chat \
   -vv
 ```
 
-### استفاده با Threads (اسکن موازی)
+### Using Threads (Parallel Scanning)
 
 ```bash
-# 5 threads - سرعت معمول
+# 5 threads - normal speed
 python3 llm_security_checker.py --url https://api.example.com/chat --threads 5
 
-# 10 threads - سرعت بالا
+# 10 threads - high speed
 python3 llm_security_checker.py --url https://api.example.com/chat --threads 10
 
 # 10 threads + logging
@@ -310,64 +310,64 @@ python3 llm_security_checker.py --url https://api.example.com/chat --threads 10 
 python3 llm_security_checker.py --curl-file request.curl --threads 8 --log-file scan.log
 ```
 
-### استفاده با Output (ذخیره نتایج)
+### Using Output (Save Results)
 
 ```bash
-# ساده - نتایج در فایل ذخیره می‌شوند
+# Simple - results saved to file
 python3 llm_security_checker.py --url https://api.example.com/chat --output results.txt
 
-# با logging
+# With logging
 python3 llm_security_checker.py --url https://api.example.com/chat \
   --output results.txt \
   --log-file scan.log
 
-# با threads و output
+# With threads and output
 python3 llm_security_checker.py --url https://api.example.com/chat \
   --output results.txt \
   --threads 10 \
   -v
 ```
 
-### استفاده با Resume (ادامه اسکن قطع شده)
+### Using Resume (Continue Interrupted Scan)
 
 ```bash
-# اسکن شروع کنید
+# Start scan
 python3 llm_security_checker.py --url https://api.example.com/chat \
   --output results.txt \
   --threads 5
 
-# اگر قطع شد (Ctrl+C)، ادامه دهید:
+# If interrupted (Ctrl+C), continue:
 python3 llm_security_checker.py --url https://api.example.com/chat \
   --resume \
   --output results.txt
 
-# Resume با تغییر threads
+# Resume with different threads
 python3 llm_security_checker.py --url https://api.example.com/chat \
   --resume \
   --output results.txt \
   --threads 10
 ```
 
-### استفاده با Selective Checks (بخش‌های خاص)
+### Using Selective Checks (Specific Tests)
 
 ```bash
-# فقط Prompt Injection (سریع)
+# Prompt Injection only (fast)
 python3 llm_security_checker.py --url https://api.example.com/chat --checks injection
 
-# چند بخش
+# Multiple checks
 python3 llm_security_checker.py --url https://api.example.com/chat --checks ssl,auth,injection
 
-# بخش‌های اساسی
+# Basic checks
 python3 llm_security_checker.py --url https://api.example.com/chat \
   --checks ssl,auth,headers,session
 
-# بخش‌های LLM
+# LLM checks
 python3 llm_security_checker.py --url https://api.example.com/chat \
   --checks injection,extraction,llm \
   --threads 10
 ```
 
-### ترکیب تمام گزینه‌ها
+### Combining All Options
 
 ```bash
 # Curl file + custom headers + logging + threads + output + resume
@@ -391,15 +391,15 @@ python3 llm_security_checker.py --url https://api.example.com/chat \
   -vv
 ```
 
-### ایجاد فایل Curl
+### Creating Curl File
 
-برای ذخیره curl command در فایل:
+To save curl command to file:
 
 ```bash
-# روش 1: کپی مستقیم از مرورگر
-# در Chrome/Firefox: DevTools > Network > کلیک راست بر درخواست > Copy > Copy as cURL
+# Method 1: Copy directly from browser
+# In Chrome/Firefox: DevTools > Network > Right-click request > Copy > Copy as cURL
 
-# روش 2: ذخیره در فایل
+# Method 2: Save to file
 cat > request.curl << 'EOF'
 curl 'https://example.com/api/chat' \
   -H 'accept: */*' \
@@ -408,17 +408,17 @@ curl 'https://example.com/api/chat' \
   --data-raw '{"session_id":"abc123","question":"test"}'
 EOF
 
-# سپس اسکن کنید:
+# Then scan:
 python3 llm_security_checker.py --curl-file request.curl
 ```
 
-## توجهات
+## Notes
 
-- برخی تست‌ها نیاز به بررسی دستی دارند
-- این اسکریپت برای تست‌های آموزشی و تشخیصی است
-- برای استفاده در محیط production، تست‌های اضافی لازم است
-- هنگام استفاده از proxy، مطمئن شوید proxy شما درخواست‌های HTTPS را پشتیبانی می‌کند
+- Some tests require manual review
+- This script is for educational and diagnostic testing
+- Additional tests required for production use
+- When using proxy, ensure your proxy supports HTTPS requests
 
-## نویسنده
+## Author
 
 LLM Security Assessment Tool
