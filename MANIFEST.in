@@ -1,0 +1,17 @@
+include README.md
+include LICENSE
+include requirements.txt
+include CONTRIBUTING.md
+include QUICK_START.md
+include USAGE_EXAMPLES.md
+include CURL_PARSING.md
+include ADVANCED_USAGE.md
+include LLM_ATTACKS_GUIDE.md
+include LOGGING_AND_THREADING.md
+include RESUME_AND_OUTPUT.md
+include SELECTIVE_CHECKS.md
+include FINAL_UPDATES.md
+include example.curl
+recursive-include . *.md
+recursive-include . *.txt
+recursive-include . *.curl

@@ -1,0 +1,62 @@
+✅ LLM Security Checker - GitHub Ready
+
+📁 Folder Structure:
+/home/alireza/Personal/myCode/WindSurf/LLMChecker-GitHub/
+
+📄 Files Included:
+
+Core Application:
+- llm_security_checker.py (61K) - Main application
+- llm_attacks.py (26K) - 371 attack payloads
+- scan_state.py (4.5K) - State management
+- curl_parser.py - Curl parsing utilities
+- requirements.txt - Dependencies
+
+Documentation:
+- README.md (16K) - Main documentation
+- QUICK_START.md (3.5K) - Quick start guide
+- USAGE_EXAMPLES.md (7.4K) - Usage examples
+- CURL_PARSING.md (5.9K) - Curl parsing guide
+- ADVANCED_USAGE.md (8.2K) - Advanced usage
+- LLM_ATTACKS_GUIDE.md (10K) - Attack vectors
+- LOGGING_AND_THREADING.md (9.2K) - Logging guide
+- RESUME_AND_OUTPUT.md (8.2K) - Resume guide
+- SELECTIVE_CHECKS.md (7.4K) - Checks guide
+- FINAL_UPDATES.md (4.9K) - Final updates
+
+Project Files:
+- LICENSE - MIT License
+- CONTRIBUTING.md (2.9K) - Contribution guidelines
+- CHANGELOG.md - Version history
+- MANIFEST.in - Package manifest
+- setup.py (1.5K) - Setup script
+- .gitignore - Git ignore rules
+- example.curl (1.8K) - Example curl file
+
+🎯 Features:
+✅ 13 security test categories
+✅ 371 attack payloads (20 categories)
+✅ 100+ prompt injection variants
+✅ Parallel scanning (1-20 threads)
+✅ Resume capability
+✅ Selective checks
+✅ Logging and output to file
+✅ Comprehensive documentation
+✅ MIT License
+✅ Ready for GitHub
+
+🚀 Next Steps:
+1. Initialize git repository: git init
+2. Add all files: git add .
+3. Create initial commit: git commit -m "Initial commit"
+4. Add remote: git remote add origin <your-repo-url>
+5. Push to GitHub: git push -u origin main
+
+📊 Statistics:
+- Total Files: 19
+- Python Files: 4
+- Documentation Files: 10
+- Configuration Files: 5
+- Total Size: ~250KB
+
+✨ Implementation by bolbolsec

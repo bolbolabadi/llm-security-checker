@@ -1,0 +1,16 @@
+curl 'https://asky.apps.private.okd4.teh-2.snappcloud.io/chat' \
+  -H 'accept: */*' \
+  -H 'accept-language: en-US,en;q=0.9,fa;q=0.8' \
+  -H 'content-type: application/json' \
+  -b '_ym_uid=1755587700110340742; _ym_d=1755587700; _ga_9HEPED01YX=GS2.1.s1755935216$o1$g1$t1755935588$j60$l0$h0; _hjSessionUser_3602712=eyJpZCI6IjMxZGUyYzA2LTc5YmItNWRmZS05NTNiLTk2YTIyNTc0MWM2MCIsImNyZWF0ZWQiOjE3NTU1ODc3MDExNjUsImV4aXN0aW5nIjp0cnVlfQ==; _ga_B1S9Z5J8ZG=GS2.1.s1755935791$o2$g1$t1755935807$j44$l0$h1410459692; _hjSessionUser_3245182=eyJpZCI6ImQxYzk4MDc5LTgxMjMtNWI5ZS1iZmIwLWE5NDRhZjJkZDVmZSIsImNyZWF0ZWQiOjE3NTU5MzU4NjQ5MzIsImV4aXN0aW5nIjp0cnVlfQ==; _ga_6CT4GD74ZL=GS2.1.s1755935864$o1$g1$t1755936040$j60$l0$h0; _ga_1P3BJP4SM2=GS2.1.s1755935879$o1$g1$t1755936216$j60$l0$h0; _ga_Y4QV007ERR=GS2.1.s1755935880$o1$g1$t1755936216$j60$l0$h0; _gcl_au=1.1.778226727.1755936279; _hjSessionUser_3292968=eyJpZCI6ImFhZDY2MDU4LWMzY2ItNTE5NC1hNzU4LWUxYjg5MTE0Y2JhYSIsImNyZWF0ZWQiOjE3NTU5MzYyODA5NzAsImV4aXN0aW5nIjp0cnVlfQ==; _ga=GA1.2.248608716.1755587700; _ga_5KH2DJK8BN=GS2.1.s1755936280$o1$g1$t1755936331$j9$l0$h0; _clck=1xamqts%5E2%5Eg02%5E0%5E2057' \
+  -H 'origin: https://asky.apps.private.okd4.teh-2.snappcloud.io' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://asky.apps.private.okd4.teh-2.snappcloud.io/' \
+  -H 'sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Linux"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36' \
+  --data-raw '{"session_id":"39d9b558-7b83-408f-aba0-a594505364d3","question":"سلام"}'
